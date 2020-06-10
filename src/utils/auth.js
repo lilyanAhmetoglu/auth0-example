@@ -19,7 +19,6 @@ export default class Auth{
             if(authResult) {
                 localStorage.setItem('access_token', authResult.accessToken)
                 localStorage.setItem('id_token',authResult.id_token)
-
                 let expiresAt = JSON.stringify((authResult.expiresIn * 1000 + new Date().getTime()))
                 localStorage.setItem('expiresAt',expiresAt)    
             }
@@ -32,5 +31,10 @@ export default class Auth{
         localStorage.removeItem('access_token')
         localStorage.removeItem('id_token')
         localStorage.removeItem('expiresAt')
+    }
+
+    isAuthenticated = () =>{
+        let expiresAt = JSON.parse(localStorage.getItem('expiresAt'))
+        return new Date().getTime() < expiresAt
     }
 }
