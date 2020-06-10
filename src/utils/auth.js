@@ -18,7 +18,7 @@ export default class Auth{
         this.auth0.parseHash ((err,authResult) =>{
             if(authResult) {
                 localStorage.setItem('access_token', authResult.accessToken)
-                localStorage.setItem('id_token',authResult.id_token)
+                localStorage.setItem('id_token',authResult.idToken)
                 let expiresAt = JSON.stringify((authResult.expiresIn * 1000 + new Date().getTime()))
                 localStorage.setItem('expiresAt',expiresAt)    
             }
