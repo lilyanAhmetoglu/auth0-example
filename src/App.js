@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Router, Route, Switch } from "react-router";
+import Callback from "./functions/callback";
+import Home from "./components/Home";
+import Auth from './utils/auth'
 
-function App() {
+export const auth = new Auth();
+const handleAuthentication = (props) => {
+  if (props.location.hash) {
+    auth.handleAuth();
+  }
+};
+const Routes = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route path="/" exact render={() => <Home auth={auth} />} />
+      <Route
+        path="/callback"
+        render={(props) => {
+          handleAuthentication(props);
+          return <Callback />;
+        }}
+      />
+    </Switch>
   );
-}
+};
 
-export default App;
+export default Routes;
