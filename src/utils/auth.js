@@ -7,7 +7,7 @@ export default class Auth{
         clientID : 'reutdRPIiqN9lCiC6mLKdP6IoqNesjUh',
         redirectUri:'http://localhost:3000/callback',
         responseType:'token id_token code',
-        scope:'openid offline_access',
+        scope:'openid profile email',
     })
     login =() =>{
         this.auth0.authorize()  // this function is only opening the auth0 login page hosted on auth0
